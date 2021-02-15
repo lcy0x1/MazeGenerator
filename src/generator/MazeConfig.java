@@ -12,8 +12,8 @@ public class MazeConfig {
 	private static final double LOOP_FAC = 0.7;
 	private static final double CONN_PRI = 0.1;
 	private static final double CONN_SEC = 0.3;
-	private final int[] path, loop;
-	private final double path_fac, loop_fac, conn_pri, conn_sec;
+	public int[] path, loop;
+	public double path_fac, loop_fac, conn_pri, conn_sec;
 
 	public MazeConfig() {
 		path = PATH;
