@@ -2,7 +2,7 @@ package objective;
 
 public abstract class MazeCellData<T extends MazeCellData<T>> {
 
-	public int access_direction;
+	public int access_direction, x, y, n;
 
 	public abstract void fillData(T[] children);
 
@@ -13,7 +13,10 @@ public abstract class MazeCellData<T extends MazeCellData<T>> {
 		return (T) this;
 	}
 
-	public T setAccessDire(int dire) {
+	public T setAccessDire(int x, int y, int dire, int n) {
+		this.x = x;
+		this.y = y;
+		this.n = n;
 		access_direction = dire;
 		return getThis();
 	}

@@ -20,7 +20,7 @@ public class Registry {
 		}
 
 		public double execute(int[][] ans, int x, int y) {
-			return new MazeIterator<T>(ans, this).iterate(x, y).getResult();
+			return new MazeIterator<T>(ans, this).iterate(x, y, -1).getResult();
 		}
 
 	}

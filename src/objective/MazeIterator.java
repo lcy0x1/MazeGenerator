@@ -19,8 +19,8 @@ public class MazeIterator<T extends MazeCellData<T>> {
 		value = (T[][]) Array.newInstance(entry.cls, n = maze.length, maze.length);
 	}
 
-	public T iterate(int x, int y) {
-		value[x][y] = ent.sup.get();
+	public T iterate(int x, int y, int dire) {
+		value[x][y] = ent.sup.get().setAccessDire(x, y, dire, n);
 		int cell = maze[x][y];
 		@SuppressWarnings("unchecked")
 		T[] ans = (T[]) Array.newInstance(ent.cls, 4);
@@ -34,7 +34,7 @@ public class MazeIterator<T extends MazeCellData<T>> {
 				continue;
 			if (value[nx][ny] != null)
 				continue;
-			ans[j++] = iterate(nx, ny).setAccessDire(i);
+			ans[j++] = iterate(nx, ny, i);
 
 		}
 		value[x][y].fillData(Arrays.copyOf(ans, j));
