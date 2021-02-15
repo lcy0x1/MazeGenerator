@@ -30,6 +30,8 @@ public class Registry {
 	static {
 		new Entry<FarpointObjective>("furthest pair distance", FarpointObjective.class, FarpointObjective::new);
 		new Entry<BranchCountObjective>("branch count", BranchCountObjective.class, BranchCountObjective::new);
+		new Entry<StraightLeafObjective>("straight leaf size", StraightLeafObjective.class, StraightLeafObjective::new);
+		new Entry<ComplexBranchObjective>("complexity", ComplexBranchObjective.class, ComplexBranchObjective::new);
 	}
 
 }

@@ -37,17 +37,25 @@ public class MazeDraw {
 		// System.setOut(ps);
 		try {
 			MazeConfig config = readConfig();
-			MazeGen maze = new MazeGen(25, new Random(), config, new Debugger());
-			maze.gen();
-			for (Registry.Entry<?> ent : Registry.LIST) {
-				double ans = ent.execute(maze.ans, maze.r, maze.r);
-				System.out.println(ent.name + ": " + ans);
-			}
-			// drawPNG(maze);
+			perform(config);
+			//long t0 = System.currentTimeMillis();
+			perform(config);
+			//long t1 = System.currentTimeMillis();
+			//System.out.println(t1 - t0);
 		} catch (Exception e) {
 			e.printStackTrace(ps);
 		}
 		ps.close();
+	}
+	
+	public static void perform(MazeConfig config){
+		MazeGen maze = new MazeGen(12, new Random(), config, new Debugger());
+		maze.gen();
+		for (Registry.Entry<?> ent : Registry.LIST) {
+			double ans = ent.execute(maze.ans, maze.r, maze.r);
+			System.out.println(ent.name + ": " + ans);
+		}
+		//drawPNG(maze);
 	}
 
 	public static MazeConfig readConfig() throws IOException {
