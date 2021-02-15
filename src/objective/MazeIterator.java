@@ -3,15 +3,7 @@ package objective;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-public class MazeIterator<T extends MazeIterator.MazeCellData<T>> {
-
-	public static abstract class MazeCellData<T extends MazeCellData<T>> {
-
-		public abstract void fillData(T[] children);
-		
-		public abstract double getResult();
-
-	}
+public class MazeIterator<T extends MazeCellData<T>> {
 
 	public static final int[][] DIRE = { { 0, -1, 4 }, { 0, 1, 8 }, { -1, 0, 1 }, { 1, 0, 2 } };
 
@@ -42,7 +34,8 @@ public class MazeIterator<T extends MazeIterator.MazeCellData<T>> {
 				continue;
 			if (value[nx][ny] != null)
 				continue;
-			ans[j++] = iterate(nx, ny);
+			ans[j++] = iterate(nx, ny).setAccessDire(i);
+
 		}
 		value[x][y].fillData(Arrays.copyOf(ans, j));
 		return value[x][y];

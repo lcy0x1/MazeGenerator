@@ -1,6 +1,6 @@
 package objective;
 
-public class FarpointObjective extends MazeIterator.MazeCellData<FarpointObjective> {
+public class FarpointObjective extends MazeCellData<FarpointObjective> {
 
 	/** maximum distance to the root node */
 	public int to_root;

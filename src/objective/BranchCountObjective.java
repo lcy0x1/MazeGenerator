@@ -1,6 +1,6 @@
 package objective;
 
-public class BranchCountObjective extends MazeIterator.MazeCellData<BranchCountObjective> {
+public class BranchCountObjective extends MazeCellData<BranchCountObjective> {
 
 	/** branch count */
 	public int count;

@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 public class Registry {
 
-	public static class Entry<T extends MazeIterator.MazeCellData<T>> {
+	public static class Entry<T extends MazeCellData<T>> {
 
 		public final Class<T> cls;
 		public final Supplier<T> sup;
