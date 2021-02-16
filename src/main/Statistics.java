@@ -12,13 +12,13 @@ import objective.Registry;
 
 public class Statistics {
 
-	public static final double[] EB = { 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6 };
-	public static final double[] EU = { 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 };
+	public static final double[] EB = { 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1 };
+	public static final double[] EU = { 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 };
 	public static final double[] FU = { 0.01, 0.02, 0.04, 0.07, 0.1, 0.15, 0.2, 0.3 };
 	public static final double[] SU = { 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 };
 	public static final int[][] BW = { { 4, 1, 1 }, { 3, 2, 1 }, { 3, 1, 2 }, { 2, 3, 1 }, { 2, 2, 2 }, { 2, 1, 3 },
 			{ 1, 4, 1 }, { 1, 3, 2 }, { 1, 2, 3 }, { 1, 1, 4 } };
-	public static final int[][] SW = { { 4, 1 }, { 3, 2 }, { 2, 3 }, { 1, 4 } };
+	public static final int[][] SW = { { 5, 1 }, { 4, 2 }, { 3, 3 }, { 2, 4 }, { 1, 5 } };
 	public static final int TRIAL = 50;
 	public static final int R = 12;
 	public static final int SIZE = EB.length * EU.length * FU.length * SU.length * BW.length * SW.length;

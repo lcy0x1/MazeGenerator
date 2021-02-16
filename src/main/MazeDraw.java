@@ -29,7 +29,7 @@ public class MazeDraw {
 	}
 
 	public static void main(String[] args) throws IOException {
-		File fx = new File("./log.txt");
+		File fx = new File("./log.log");
 		if (!fx.exists())
 			fx.createNewFile();
 		PrintStream ps = new PrintStream(fx);
@@ -38,24 +38,24 @@ public class MazeDraw {
 		try {
 			MazeConfig config = readConfig();
 			perform(config);
-			//long t0 = System.currentTimeMillis();
+			// long t0 = System.currentTimeMillis();
 			perform(config);
-			//long t1 = System.currentTimeMillis();
-			//System.out.println(t1 - t0);
+			// long t1 = System.currentTimeMillis();
+			// System.out.println(t1 - t0);
 		} catch (Exception e) {
 			e.printStackTrace(ps);
 		}
 		ps.close();
 	}
-	
-	public static void perform(MazeConfig config){
+
+	public static void perform(MazeConfig config) throws IOException {
 		MazeGen maze = new MazeGen(12, new Random(), config, new Debugger());
 		maze.gen();
 		for (Registry.Entry<?> ent : Registry.LIST) {
 			double ans = ent.execute(maze.ans, maze.r, maze.r);
 			System.out.println(ent.name + ": " + ans);
 		}
-		//drawPNG(maze);
+		drawPNG(maze);
 	}
 
 	public static MazeConfig readConfig() throws IOException {
