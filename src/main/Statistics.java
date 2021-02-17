@@ -12,15 +12,23 @@ import objective.Registry;
 
 public class Statistics {
 
-	public static final double[] EB = { 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1 };
-	public static final double[] EU = { 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 };
-	public static final double[] FU = { 0.01, 0.02, 0.04, 0.07, 0.1, 0.15, 0.2, 0.3 };
-	public static final double[] SU = { 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 };
-	public static final int[][] BW = { { 4, 1, 1 }, { 3, 2, 1 }, { 3, 1, 2 }, { 2, 3, 1 }, { 2, 2, 2 }, { 2, 1, 3 },
-			{ 1, 4, 1 }, { 1, 3, 2 }, { 1, 2, 3 }, { 1, 1, 4 } };
-	public static final int[][] SW = { { 5, 1 }, { 4, 2 }, { 3, 3 }, { 2, 4 }, { 1, 5 } };
+	//public static final double[] EB = { 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1 };
+	//public static final double[] EU = { 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 };
+	//public static final double[] FU = { 0.01, 0.02, 0.04, 0.07, 0.1, 0.15, 0.2, 0.3 };
+	//public static final double[] SU = { 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 };
+	//public static final int[][] BW = { { 40, 10, 10 }, { 30, 20, 10 }, { 30, 10, 20 }, { 20, 30, 10 }, { 20, 20, 20 }, { 20, 10, 30 }, { 10, 40, 10 }, { 10, 30, 20 }, { 10, 20, 30 }, { 10, 10, 40 } };
+	//public static final int[][] SW = { { 50, 10 }, { 40, 20 }, { 30, 30 }, { 20, 40 }, { 10, 50 } };
+	
+	
+	public static final double[] EB = { 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95 };
+	public static final double[] EU = { 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95 };
+	public static final double[] FU = { 0.005, 0.015, 0.03, 0.05, 0.12, 0.25, 0.35, 0.45 };
+	public static final double[] SU = { 0.12, 0.18, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75 };
+	public static final int[][] BW = { { 35, 10, 15 }, { 25, 20, 15 }, { 25, 10, 25 }, { 15, 30, 15 }, { 15, 20, 25 }, { 15, 10, 35 }, { 15, 40, 15 }, { 5, 30, 25 }, { 5, 20, 35 }, { 5, 10, 45 } };
+	public static final int[][] SW = { { 55, 5 }, { 45, 15 }, { 25, 35 }, { 15, 45 }, { 5, 55 } };
+	
 	public static final int TRIAL = 50;
-	public static final int R = 12;
+	public static final int R = 25;
 	public static final int SIZE = EB.length * EU.length * FU.length * SU.length * BW.length * SW.length;
 
 	public static int r = R;
@@ -29,7 +37,7 @@ public class Statistics {
 	private static PrintStream ps;
 
 	public static void main(String[] args) throws IOException {
-		File f = new File("25x25.csv");
+		File f = new File("50x50_1.csv");
 		if (!f.exists())
 			f.createNewFile();
 		ps = new PrintStream(f);
@@ -80,11 +88,11 @@ public class Statistics {
 		ps.print(',');
 		ps.print(config.conn_sec);
 		ps.print(',');
-		ps.print(config.path[0]);
+		ps.print(config.path[0]/10.0);
 		ps.print(',');
-		ps.print(config.path[1]);
+		ps.print(config.path[1]/10.0);
 		ps.print(',');
-		ps.print(config.loop[0]);
+		ps.print(config.loop[0]/10.0);
 		ps.print(',');
 		for (int i = 0; i < n; i++) {
 			ps.print(sum[i]);
