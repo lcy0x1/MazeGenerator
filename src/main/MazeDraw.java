@@ -39,7 +39,7 @@ public class MazeDraw {
 			MazeConfig config = readConfig();
 			perform(config);
 			// long t0 = System.currentTimeMillis();
-			perform(config);
+			//perform(config);
 			// long t1 = System.currentTimeMillis();
 			// System.out.println(t1 - t0);
 		} catch (Exception e) {

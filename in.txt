@@ -1,6 +1,6 @@
-branch_weights: 1 2 3 0 0 0 0
-U_shape_weights: 1 4 0 0 0 0 0
-effective_branch_percentage: 50
-effect_U_shape_percentage: 100
+branch_weights: 3 6 51 0 0 0 0
+U_shape_weights: 5 55 0 0 0 0 0
+effective_branch_percentage: 28
+effect_U_shape_percentage: 90
 first_U_shape_connection_rate: 10
-non_first_U_shape_connection_rate: 30
+non_first_U_shape_connection_rate: 93
