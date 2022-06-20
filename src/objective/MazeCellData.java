@@ -1,10 +1,10 @@
 package objective;
 
-public abstract class MazeCellData<T extends MazeCellData<T>> {
+public abstract class MazeCellData<T extends MazeCellData<T,E>, E extends MazeGeneralData> {
 
 	public int access_direction, x, y, n;
 
-	public abstract void fillData(T[] children);
+	public abstract void fillData(E global, T[] children);
 
 	public abstract double getResult();
 

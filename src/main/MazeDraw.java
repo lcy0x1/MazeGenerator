@@ -1,5 +1,14 @@
 package main;
 
+import generator.MazeConfig;
+import generator.MazeGen;
+import generator.MazeGen.Debugger;
+import objective.LeafMarker;
+import objective.MazeIterator;
+import objective.Registry;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -8,21 +17,14 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-
-import generator.MazeConfig;
-import generator.MazeGen;
-import generator.MazeGen.Debugger;
-import objective.Registry;
-
 public class MazeDraw {
 
-	public static void drawPNG(MazeGen maze) throws IOException {
+	public static void drawPNG(MazeGen maze, LeafMarker.LeafSetData global, LeafMarker[][] marks) throws IOException {
 		File f = new File("./out.png");
 		BufferedImage bimg = new BufferedImage(maze.w * 5, maze.w * 5, BufferedImage.TYPE_3BYTE_BGR);
 		for (int i = 0; i < maze.w; i++)
 			for (int j = 0; j < maze.w; j++)
-				fillAns(bimg, maze, i, j);
+				fillAns(bimg, maze, i, j, global, marks[i][j]);
 		if (!f.exists())
 			f.createNewFile();
 		ImageIO.write(bimg, "PNG", f);
@@ -38,10 +40,6 @@ public class MazeDraw {
 		try {
 			MazeConfig config = readConfig();
 			perform(config);
-			// long t0 = System.currentTimeMillis();
-			//perform(config);
-			// long t1 = System.currentTimeMillis();
-			// System.out.println(t1 - t0);
 		} catch (Exception e) {
 			e.printStackTrace(ps);
 		}
@@ -49,13 +47,14 @@ public class MazeDraw {
 	}
 
 	public static void perform(MazeConfig config) throws IOException {
-		MazeGen maze = new MazeGen(12, new Random(), config, new Debugger());
+		MazeGen maze = new MazeGen(45, new Random(), config, new Debugger());
 		maze.gen();
-		for (Registry.Entry<?> ent : Registry.LIST) {
+		for (Registry.Entry<?, ?> ent : Registry.LIST) {
 			double ans = ent.execute(maze.ans, maze.r, maze.r);
 			System.out.println(ent.name + ": " + ans);
 		}
-		drawPNG(maze);
+		MazeIterator<LeafMarker, LeafMarker.LeafSetData> itr = Registry.MARKER.generate(maze.ans, maze.r, maze.r);
+		drawPNG(maze, itr.global, itr.value);
 	}
 
 	public static MazeConfig readConfig() throws IOException {
@@ -76,23 +75,25 @@ public class MazeDraw {
 		return new MazeConfig(i0, i1, i2 * 0.01, i3 * 0.01, i4 * 0.01, i5 * 0.01);
 	}
 
-	private static void fillAns(BufferedImage chs, MazeGen maze, int i, int j) {
+	private static void fillAns(BufferedImage chs, MazeGen maze, int i, int j, LeafMarker.LeafSetData global, LeafMarker marker) {
+		int col = Color.HSBtoRGB(1f * marker.getColor() / (global.current_color + 1), 1f, 1f);
+		col = marker.level == 0 ? col : 0xFFFFFF;
 		for (int a = 0; a < 5; a++)
 			for (int b = 0; b < 5; b++)
 				if (a == 0 || b == 0 || a == 4 || b == 4)
 					chs.setRGB(i * 5 + a, j * 5 + b, 0x000000);
 				else
-					chs.setRGB(i * 5 + a, j * 5 + b, 0xffffff);
+					chs.setRGB(i * 5 + a, j * 5 + b, col);
 		int ans = maze.ans[i][j];
 		for (int k = 1; k <= 3; k++) {
 			if ((ans & 1) > 0)
-				chs.setRGB(i * 5, j * 5 + k, 0xffffff);
+				chs.setRGB(i * 5, j * 5 + k, col);
 			if ((ans & 2) > 0)
-				chs.setRGB(i * 5 + 4, j * 5 + k, 0xffffff);
+				chs.setRGB(i * 5 + 4, j * 5 + k, col);
 			if ((ans & 4) > 0)
-				chs.setRGB(i * 5 + k, j * 5, 0xffffff);
+				chs.setRGB(i * 5 + k, j * 5, col);
 			if ((ans & 8) > 0)
-				chs.setRGB(i * 5 + k, j * 5 + 4, 0xffffff);
+				chs.setRGB(i * 5 + k, j * 5 + 4, col);
 		}
 	}
 

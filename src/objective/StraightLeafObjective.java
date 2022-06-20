@@ -1,13 +1,13 @@
 package objective;
 
-public class StraightLeafObjective extends MazeCellData<StraightLeafObjective> {
+public class StraightLeafObjective extends MazeCellData<StraightLeafObjective, MazeGeneralData> {
 
 	/** branch count */
 	public int count;
 	public boolean isLeaf;
 
 	@Override
-	public void fillData(StraightLeafObjective[] children) {
+	public void fillData(MazeGeneralData global, StraightLeafObjective[] children) {
 		if (children.length == 0) {
 			isLeaf = true;
 			count = 1;

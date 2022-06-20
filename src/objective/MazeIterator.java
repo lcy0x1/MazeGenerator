@@ -3,19 +3,21 @@ package objective;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-public class MazeIterator<T extends MazeCellData<T>> {
+public class MazeIterator<T extends MazeCellData<T,E>, E extends MazeGeneralData> {
 
 	public static final int[][] DIRE = { { 0, -1, 4 }, { 0, 1, 8 }, { -1, 0, 1 }, { 1, 0, 2 } };
 
 	public final T[][] value;
 	public final int[][] maze;
 	public final int n;
-	public final Registry.Entry<T> ent;
+	public final Registry.Entry<T,E> ent;
+	public final E global;
 
 	@SuppressWarnings("unchecked")
-	public MazeIterator(int[][] maze, Registry.Entry<T> entry) {
+	public MazeIterator(int[][] maze, Registry.Entry<T,E> entry) {
 		this.maze = maze;
 		this.ent = entry;
+		this.global = entry.gen.get();
 		value = (T[][]) Array.newInstance(entry.cls, n = maze.length, maze.length);
 	}
 
@@ -37,7 +39,7 @@ public class MazeIterator<T extends MazeCellData<T>> {
 			ans[j++] = iterate(nx, ny, i);
 
 		}
-		value[x][y].fillData(Arrays.copyOf(ans, j));
+		value[x][y].fillData(global, Arrays.copyOf(ans, j));
 		return value[x][y];
 	}
 

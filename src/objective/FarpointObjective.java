@@ -1,6 +1,6 @@
 package objective;
 
-public class FarpointObjective extends MazeCellData<FarpointObjective> {
+public class FarpointObjective extends MazeCellData<FarpointObjective, MazeGeneralData> {
 
 	/** maximum distance to the root node */
 	public int to_root;
@@ -8,7 +8,7 @@ public class FarpointObjective extends MazeCellData<FarpointObjective> {
 	public int internal;
 
 	@Override
-	public void fillData(FarpointObjective[] children) {
+	public void fillData(MazeGeneralData global, FarpointObjective[] children) {
 		int count = children.length;
 		if (count == 0) {
 			to_root = 1;

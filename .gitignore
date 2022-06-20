@@ -27,3 +27,5 @@ log.txt
 out.png
 *.csv
 **/*/.DS_store
+.idea/
+*.iml

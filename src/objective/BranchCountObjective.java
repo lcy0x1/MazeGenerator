@@ -1,12 +1,12 @@
 package objective;
 
-public class BranchCountObjective extends MazeCellData<BranchCountObjective> {
+public class BranchCountObjective extends MazeCellData<BranchCountObjective, MazeGeneralData> {
 
 	/** branch count */
 	public int count;
 
 	@Override
-	public void fillData(BranchCountObjective[] children) {
+	public void fillData(MazeGeneralData global, BranchCountObjective[] children) {
 		if (children.length == 0)
 			count = 1;
 		else if (children.length == 1)

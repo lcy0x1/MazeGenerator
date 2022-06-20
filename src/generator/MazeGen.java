@@ -276,12 +276,12 @@ public class MazeGen {
 			int[] rarr = randArray(rim.length, rand);
 			for (int j = 0; j < rim.length; j++) {
 				int ind = rarr[j];
-				int path = config.randPath(rim[ind], rand, rootCount);
+				int path = config.randPath(i, rim[ind], rand, rootCount);
 				if (path == 0)
 					rootCount--;
 				rim[ind].path = path;
 				if (i < r)
-					rim[ind].loop = config.randLoop(rim[ind], rand);
+					rim[ind].loop = config.randLoop(i, rim[ind], rand);
 				rim[ind].seg();
 			}
 			debug.breakpoint("rim " + i + " formed");
